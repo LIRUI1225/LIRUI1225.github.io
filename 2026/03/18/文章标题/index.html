@@ -20,22 +20,28 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.27.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js" defer></script>
 
-    <meta property="og:type" content="website">
-<meta property="og:title" content="LR learning blogs">
-<meta property="og:url" content="http://example.com/index.html">
+    <meta property="og:type" content="article">
+<meta property="og:title" content="Encoder-Decoder">
+<meta property="og:url" content="http://example.com/2026/03/18/%E6%96%87%E7%AB%A0%E6%A0%87%E9%A2%98/index.html">
 <meta property="og:site_name" content="LR learning blogs">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/image-20260318222543366.png">
+<meta property="article:published_time" content="2026-03-17T16:00:00.000Z">
+<meta property="article:modified_time" content="2026-03-18T14:25:46.091Z">
 <meta property="article:author" content="LIRUI">
+<meta property="article:tag" content="NLP">
+<meta property="article:tag" content="Seq2Seq">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/image-20260318222543366.png">
 
 
-<link rel="canonical" href="http://example.com/">
+<link rel="canonical" href="http://example.com/2026/03/18/%E6%96%87%E7%AB%A0%E6%A0%87%E9%A2%98/">
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":true,"isPost":false,"lang":"zh-CN","comments":"","permalink":"","path":"index.html","title":""}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2026/03/18/%E6%96%87%E7%AB%A0%E6%A0%87%E9%A2%98/","path":"2026/03/18/文章标题/","title":"Encoder-Decoder"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>LR learning blogs</title>
+<title>Encoder-Decoder | LR learning blogs</title>
   
 
 
@@ -85,7 +91,7 @@
 
     <a href="/" class="brand" rel="start">
       <i class="logo-line"></i>
-      <h1 class="site-title">LR learning blogs</h1>
+      <p class="site-title">LR learning blogs</p>
       <i class="logo-line"></i>
     </a>
   </div>
@@ -163,173 +169,17 @@
 
     </div>
 
-    <div class="main-inner index posts-expand">
+    <div class="main-inner post posts-expand">
 
-    
+
+  
 
 
 <div class="post-block">
   
   
 
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/03/18/Encoder-Decoder/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="LIRUI">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LR learning blogs">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | LR learning blogs">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2026/03/18/Encoder-Decoder/" class="post-title-link" itemprop="url">Encoder-Decoder</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2026-03-18 00:00:00 / 修改时间：22:22:08" itemprop="dateCreated datePublished" datetime="2026-03-18T00:00:00+08:00">2026-03-18</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/" itemprop="url" rel="index"><span itemprop="name">知识点</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2026/03/18/test-image/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="LIRUI">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="LR learning blogs">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | LR learning blogs">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2026/03/18/test-image/" class="post-title-link" itemprop="url">Encoder-Decoder</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-      
-
-      <time title="创建时间：2026-03-18 00:00:00 / 修改时间：22:23:25" itemprop="dateCreated datePublished" datetime="2026-03-18T00:00:00+08:00">2026-03-18</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/" itemprop="url" rel="index"><span itemprop="name">知识点</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><img src="/image-20260318221954346.png" alt="image-20260318221954346"></p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2026/03/18/%E6%96%87%E7%AB%A0%E6%A0%87%E9%A2%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -343,13 +193,13 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content=" | LR learning blogs">
+      <meta itemprop="name" content="Encoder-Decoder | LR learning blogs">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2026/03/18/%E6%96%87%E7%AB%A0%E6%A0%87%E9%A2%98/" class="post-title-link" itemprop="url">Encoder-Decoder</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          Encoder-Decoder
+        </h1>
 
         <div class="post-meta-container">
           <div class="post-meta">
@@ -381,10 +231,8 @@
     
     
     
-    <div class="post-body" itemprop="articleBody">
-          <p><img src="/image-20260318222543366.png" alt="image-20260318222543366"></p>
+    <div class="post-body" itemprop="articleBody"><p><img src="/image-20260318222543366.png" alt="image-20260318222543366"></p>
 
-      
     </div>
 
     
@@ -392,11 +240,26 @@
     
 
     <footer class="post-footer">
-        <div class="post-eof"></div>
-      
+          <div class="post-tags">
+              <a href="/tags/NLP/" rel="tag"># NLP</a>
+              <a href="/tags/Seq2Seq/" rel="tag"># Seq2Seq</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+            </div>
+            <div class="post-nav-item">
+                <a href="/2026/03/18/test-image/" rel="next" title="Encoder-Decoder">
+                  Encoder-Decoder <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
     </footer>
   </article>
 </div>
+
 
 
 
