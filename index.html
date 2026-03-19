@@ -136,7 +136,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">2</span>
+          <span class="site-state-item-count">3</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -147,7 +147,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-count">4</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -301,6 +301,186 @@
 
 
 
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://lirui1225.github.io/2026/03/19/InstructGPT/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="LIRUI">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="LR learning blogs">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content=" | LR learning blogs">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/03/19/InstructGPT/" class="post-title-link" itemprop="url">InstructGPT</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+      
+
+      <time title="创建时间：2026-03-19 00:00:00 / 修改时间：22:45:51" itemprop="dateCreated datePublished" datetime="2026-03-19T00:00:00+08:00">2026-03-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/" itemprop="url" rel="index"><span itemprop="name">知识点</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="InstructGPT"><a href="#InstructGPT" class="headerlink" title="InstructGPT"></a>InstructGPT</h1><p><strong>1.预训练语言模型（Pretrained LM）</strong></p>
+<p><strong>2.监督微调（SFT, Supervised Fine-Tuning）</strong></p>
+<p><strong>3.RLHF：奖励模型 + 强化学习优化</strong></p>
+<h2 id="一、预训练"><a href="#一、预训练" class="headerlink" title="一、预训练"></a>一、预训练</h2><p>预训练阶段，模型的目标通常是：给定前文，预测下一个token</p>
+<p>预训练 &#x3D; 让模型拥有广泛能力</p>
+<p>对齐训练 &#x3D; 让模型学会如何使用这些能力</p>
+<p>模型在海量文本上训练，学习：</p>
+<ul>
+<li>语法</li>
+<li>事实模式</li>
+<li>常见问答结构</li>
+<li>代码风格</li>
+<li>摘要、翻译、解释等任务的隐式模式</li>
+</ul>
+<p>这个阶段得到的是一个<strong>基础模型</strong></p>
+<p><strong>预训练更像是在学“语言世界的分布”</strong>，而不是学“在聊天任务里怎样做才最符合用户期待”。</p>
+<p>没有额外对齐时，模型可能会：</p>
+<ul>
+<li>不按格式回答</li>
+<li>明明问的是 A，却展开去讲 B</li>
+<li>写得冗长、散漫</li>
+<li>把错误说得很自信</li>
+<li>对危险请求也照样给出高质量回答</li>
+<li>倾向生成“像互联网上常见文本”的东西，而不是“人真正想要的东西”</li>
+</ul>
+<h2 id="二、监督微调"><a href="#二、监督微调" class="headerlink" title="二、监督微调"></a>二、监督微调</h2><p>SFT 的作用是<strong>给模型一个很重要的初始偏向</strong>：</p>
+<ul>
+<li>学会把“用户指令”当回事</li>
+<li>学会常见任务的回答范式</li>
+<li>学会礼貌、清晰、结构化表达</li>
+<li>学会在部分危险请求上拒绝</li>
+</ul>
+<p>所以 SFT 可以理解为：先用人工示范，把模型从“会续写文本”拉到“像助手一样回答”</p>
+<p><strong>如何做？</strong></p>
+<p>人工标注者会看到一些 prompt，例如：</p>
+<ul>
+<li>“帮我写一封正式邮件”</li>
+<li>“用简单的话解释牛顿第一定律”</li>
+<li>“总结下面这段内容”</li>
+<li>“这个请求不安全，请拒绝并解释原因”</li>
+</ul>
+<p>然后标注者写出一个高质量示范答案。</p>
+<p>模型再用这些“输入—理想输出”样本做监督学习，目标是：</p>
+<ul>
+<li>给定用户指令，直接模仿高质量回答</li>
+</ul>
+<p><strong>局限？</strong></p>
+<p>人类偏好很复杂，很难靠单一“标准答案”完全表达出来</p>
+<p>比如一个问题的回答可能有很多合理版本：</p>
+<ul>
+<li>更简洁</li>
+<li>更详细</li>
+<li>更安全</li>
+<li>更有帮助</li>
+<li>更少废话</li>
+<li>更符合上下文语气</li>
+</ul>
+<p>单纯监督学习往往难以表达这种“相对偏好”</p>
+<p>这就引出下一步</p>
+<h2 id="三、RLHF"><a href="#三、RLHF" class="headerlink" title="三、RLHF"></a>三、RLHF</h2><h3 id="1-训练奖励模型"><a href="#1-训练奖励模型" class="headerlink" title="1.训练奖励模型"></a>1.训练奖励模型</h3><p>很多任务不是只有一个正确答案，而是有多个“都可以，但好坏不同”的答案。让人工说“哪个最好、哪个最差”，通常比让人工直接写标准答案更容易。</p>
+<p><strong>奖励模型学什么？</strong></p>
+<p>奖励模型的输入通常是：</p>
+<ul>
+<li>prompt</li>
+<li>一个候选回答</li>
+</ul>
+<p>输出一个分数，表示：</p>
+<ul>
+<li>这个回答有多符合人类偏好</li>
+</ul>
+<p>于是，原来模糊的“人更喜欢什么”被近似成了一个可计算的打分函数</p>
+<h3 id="2-RLHF"><a href="#2-RLHF" class="headerlink" title="2.RLHF"></a>2.RLHF</h3><p>这里的问题是：</p>
+<ul>
+<li>一个 prompt 可以有很多可接受回答</li>
+<li>我们更关心“整体质量”和“偏好排序”</li>
+<li>而不是某个固定参考答案</li>
+</ul>
+<p>强化学习擅长处理这种情况：</p>
+<ul>
+<li>模型生成一个完整回答</li>
+<li>奖励模型给它打一个总分</li>
+<li>再根据这个分数来更新模型参数</li>
+</ul>
+<p>所以这里优化的不是“和标准答案逐 token 一致”，而是：</p>
+<ul>
+<li><strong>整段回答最终获得的偏好分数</strong></li>
+</ul>
+<h3 id="3-PPO（Proximal-Policy-Optimization）"><a href="#3-PPO（Proximal-Policy-Optimization）" class="headerlink" title="3.PPO（Proximal Policy Optimization）"></a>3.PPO（Proximal Policy Optimization）</h3><p>PPO 试图让模型朝“更高奖励”的方向更新，但又不能一下改太猛。</p>
+<p>为什么不能改太猛？</p>
+<p>因为如果模型只顾着刷高奖励，可能会出现：</p>
+<ul>
+<li>语言变得怪异</li>
+<li>过度迎合奖励模型</li>
+<li>丢失原来流畅自然的能力</li>
+<li>学会“投机取巧”而不是真正更好地回答</li>
+</ul>
+<p>所以 PPO 的一个重要思想是：</p>
+<ul>
+<li><strong>更新要谨慎</strong></li>
+<li><strong>既要提高奖励，又要别离原模型太远</strong></li>
+</ul>
+<p>这就是为什么 RLHF 常常还会加入一个“不要偏离初始模型太多”的约束项</p>
 
       
     </div>
