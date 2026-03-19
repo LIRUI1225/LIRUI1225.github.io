@@ -142,7 +142,7 @@
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">1</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -209,7 +209,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2026-03-19 00:22:23" itemprop="dateModified" datetime="2026-03-19T00:22:23+08:00">2026-03-19</time>
+      <time title="修改时间：2026-03-19 14:49:18" itemprop="dateModified" datetime="2026-03-19T14:49:18+08:00">2026-03-19</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -217,11 +217,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E8%AE%BA%E6%96%87/" itemprop="url" rel="index"><span itemprop="name">论文</span></a>
-        </span>
-          ，
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E8%AE%BA%E6%96%87/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a>
+          <a href="/categories/%E7%9F%A5%E8%AF%86%E7%82%B9/" itemprop="url" rel="index"><span itemprop="name">知识点</span></a>
         </span>
     </span>
 
@@ -235,7 +231,71 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p><img src="/2026/03/18/Encoder-Decoder/image-20260319002211064.png" alt="image-20260319002211064"></p>
+          <h1 id="Encoder-Decoder（编码器-解码器）"><a href="#Encoder-Decoder（编码器-解码器）" class="headerlink" title="Encoder-Decoder（编码器-解码器）"></a>Encoder-Decoder（编码器-解码器）</h1><h2 id="一、问题本质：序列到序列建模"><a href="#一、问题本质：序列到序列建模" class="headerlink" title="一、问题本质：序列到序列建模"></a>一、问题本质：序列到序列建模</h2><p>sequence（序列）：一组有顺序的数据（如句子）</p>
+<p>conditional probability（条件概率）：在输入已知的情况下预测输出</p>
+<p>Seq2Seq(Sequence-to-sequence)（序列到序列）输入一个序列，输出另一个序列</p>
+<p><strong>P(y1,y2,…,yn∣x1,x2,…,xm)</strong></p>
+<p>P(y1,…,yn∣x)&#x3D;P(y1∣x)⋅P(y2∣y1,x)⋅P(y3∣y1,y2,x)⋯</p>
+<p>第1步：生成第一个词<br>第2步：基于前面的词生成下一个<br>…</p>
+<p><strong>逐步生成</strong>（autoregressive generation）</p>
+<h2 id="二、Encoder–Decoder-的理论结构"><a href="#二、Encoder–Decoder-的理论结构" class="headerlink" title="二、Encoder–Decoder 的理论结构"></a>二、Encoder–Decoder 的理论结构</h2><p><img src="/2026/03/18/Encoder-Decoder/image-20260319135219017.png" alt="image-20260319135219017"></p>
+<p>Encoder–Decoder 是一种将输入序列映射为中间表示（latent representation），再生成输出序列的结构</p>
+<p>x → Encoder → c → Decoder → y</p>
+<h2 id="三、Encoder（RNN版本）"><a href="#三、Encoder（RNN版本）" class="headerlink" title="三、Encoder（RNN版本）"></a>三、Encoder（RNN版本）</h2><p><strong>ht&#x3D;f(xt,ht−1)</strong></p>
+<p>x_t：第 t 个输入词（token）</p>
+<p>h_t：隐藏状态（hidden state）</p>
+<p>f：RNN &#x2F; LSTM &#x2F; GRU（状态更新函数）</p>
+<p><strong>当前理解 &#x3D; 当前输入 + 之前理解</strong>（一步一步读句子，并不断更新理解）</p>
+<p><strong>c&#x3D;hm</strong></p>
+<p>c：上下文向量（context vector）</p>
+<p>用最后一个状态代表整句话</p>
+<p><strong>所有信息被压缩成一个向量 c</strong></p>
+<h2 id="四、Decoder（RNN版本）"><a href="#四、Decoder（RNN版本）" class="headerlink" title="四、Decoder（RNN版本）"></a>四、Decoder（RNN版本）</h2><p><strong>st&#x3D;f(yt−1,st−1,c)</strong></p>
+<p>st：状态</p>
+<p>yt：输出</p>
+<p>c：输入信息</p>
+<p><strong>P(yt)&#x3D;softmax(Wst)</strong></p>
+<p>把一个向量变成概率分布：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[2.0, 1.0, 0.1] → [0.7, 0.2, 0.1]</span><br></pre></td></tr></table></figure>
+
+<p>模型在问：<strong>下一个词最可能是什么？</strong></p>
+<h2 id="五、核心问题：为什么-RNN-不够好"><a href="#五、核心问题：为什么-RNN-不够好" class="headerlink" title="五、核心问题：为什么 RNN 不够好"></a>五、核心问题：为什么 RNN 不够好</h2><p>信息压缩（information bottleneck）</p>
+<p>长距离依赖（long-range dependency）</p>
+<p>计算无法并行（sequential computation）</p>
+<p>信息路径：x₁ → x₂ → … → xₘ → c → decoder</p>
+<p>路太长：早期信息会消失</p>
+<h2 id="六、Attention（关键机制）"><a href="#六、Attention（关键机制）" class="headerlink" title="六、Attention（关键机制）"></a>六、Attention（关键机制）</h2><p>Encoder输出：h1,h2,…,hm</p>
+<p>每个 h_i：输入第 i 个词的表示，这是 encoder 的输出序列</p>
+<p>每个词都有一个“理解向量”</p>
+<p><strong>score(st,hi)</strong></p>
+<p>当前要生成的状态（s_t）vs输入第 i 个词（h_i）</p>
+<p>“这个词和我现在要生成的内容相关吗？”</p>
+<p><strong>softmax（归一化）</strong></p>
+<img src="image-20260319143707521.png" alt="image-20260319143707521" style="zoom:50%;" />
+
+<p>把所有 score 变成：加起来 &#x3D; 1 的概率</p>
+<p>我应该关注哪个词？<br>关注多少？</p>
+<p><strong>加权求和</strong></p>
+<img src="image-20260319143828253.png" alt="image-20260319143828253" style="zoom:50%;" />
+
+<p>用权重组合所有输入信息：重点词影响更大，无关词影响更小</p>
+<p><strong>完整流程</strong></p>
+<p>step1:拿出当前状态<br>$$<br>s_t<br>$$<br>表示“我现在要生成第 t 个词”</p>
+<p>Step2:和每个输入词比较</p>
+<p>s_t vs h_1<br>s_t vs h_2<br>…</p>
+<p>Step3:得到权重<br>α₁, α₂, …, α_m</p>
+<p>Step4:加权求和</p>
+<p>c_t &#x3D; α₁h₁ + α₂h₂ + …</p>
+<p>step5:用于生成</p>
+<img src="image-20260319144452133.png" alt="image-20260319144452133" style="zoom:50%;" />
+
+
+
+<p><strong>本质</strong></p>
+<p>从所有输入中“选重点信息”</p>
+<p>Attention 是一种 <strong>动态信息检索机制</strong></p>
+<p>RNN：一个向量 c</p>
+<p>Attention：每一步都有不同的 c_t</p>
 
       
     </div>
